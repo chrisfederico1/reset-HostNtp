@@ -40,13 +40,15 @@ Begin {
     Clear-Host
 
     # Start the logger
-    Start-Transcript -path .\reset-hostntp.txt -Force
+    Start-Transcript -path .\reset-hostntpLog.txt -Force
 
     # Get NTP Server List
     $InputNTP1 = Read-Host "First NTP Server:" 
     $InputNTP2 = Read-Host "Second NTP Server:" 
     $InputNTP3 = Read-Host "Third NTP Server:" 
     $InputNTP4 = Read-Host "Fourth NTP Server:"
+    write-host ""
+
     
     
 }
@@ -72,16 +74,16 @@ Process {
         foreach ($vmhostName in $allVMhost)
                  { 
                  #Remove existing NTP servers 
-                 Write-Host "INFO: Removing all NTP Servers from $vmhostName" 
+                 Write-Host "INFO: Removing all NTP Servers from $vmhostName" -ForegroundColor Yellow
                  $allNTPList = Get-VMHostNtpServer -VMHost $vmhostName 
                  Remove-VMHostNtpServer -VMHost $vmhostName -NtpServer $allNTPList -Confirm:$false | out-null 
-                 Write-Host "INFO: All NTP Servers from $vmhostName have been removed" 
+                 Write-Host "INFO: All NTP Servers from $vmhostName have been removed" -ForegroundColor Yellow 
                  Write-Host ""
 
                  #Setting NTP servers 
-                 Write-Host "INFO: Adding NTP servers to $vmhostName"
+                 Write-Host "INFO: Adding NTP servers to $vmhostName" -ForegroundColor Yellow
                  Add-VmHostNtpServer -NtpServer $ntp1,$ntp2,$ntp3,$ntp4 -VMHost $vmhostName -Confirm:$false | out-null
-                 Write-Host "INFO: The following NTP servers have been added to $vmhostName : $ntp1, $ntp2, $ntp3, $ntp4" 
+                 Write-Host "INFO: The following NTP servers have been added to $vmhostName : $ntp1, $ntp2, $ntp3, $ntp4" -ForegroundColor Yellow 
                  Write-Host ""
 
                  #Checking NTP Service on the ESXi host 
@@ -90,27 +92,27 @@ Process {
 
                  if ($ntp.Running ){ 
                     Restart-VMHostService $ntp -confirm:$false 
-                    Write-Host "INFO: $ntp Service on $vmhostName was On and was restarted"
+                    Write-Host "INFO: $ntp Service on $vmhostName was On and was restarted" -ForegroundColor Yellow
                     }
                     Else{ 
                         Start-VMHostService $ntp -confirm:$false 
-                        Write-Host "INFO: $ntp Service on $vmhostName was Off and has been started"
+                        Write-Host "INFO: $ntp Service on $vmhostName was Off and has been started" -ForegroundColor Yellow
                     }
 
                  }
         }
         else {
             #Remove existing NTP servers
-            Write-Host "INFO: Removing all NTP Servers from $VMHost"
+            Write-Host "INFO: Removing all NTP Servers from $VMHost" -ForegroundColor Yellow
             $allNTPList = Get-VMHostNtpServer -VMHost $VMHost
             Remove-VMHostNtpServer -VMHost $VMHost -NtpServer $allNTPList -Confirm:$false | out-null
-            Write-Host "INFO: All NTP Servers from $VMHost have been removed" 
+            Write-Host "INFO: All NTP Servers from $VMHost have been removed"  -foreground Yellow
             Write-Host ""
 
             #Setting NTP servers 
             Write-Host "INFO: Adding NTP servers to $VMHost"
             Add-VmHostNtpServer -NtpServer $ntp1,$ntp2,$ntp3,$ntp4 -VMHost $VMHost -Confirm:$false | out-null
-            Write-Host "INFO: The following NTP servers have been added to $VMHost : $ntp1, $ntp2, $ntp3, $ntp4" 
+            Write-Host "INFO: The following NTP servers have been added to $VMHost : $ntp1, $ntp2, $ntp3, $ntp4" -ForegroundColor Yellow
             Write-Host ""
 
             #Checking NTP Service on the ESXi host 
@@ -119,12 +121,12 @@ Process {
 
             if ($ntp.Running ){ 
                 Restart-VMHostService $ntp -confirm:$false 
-                Write-Host "INFO: $ntp Service on $VMHost was On and was restarted"
+                Write-Host "INFO: $ntp Service on $VMHost was On and was restarted" -ForegroundColor Yellow
                 }
                 Else{
 
                     Start-VMHostService $ntp -confirm:$false 
-                    Write-Host "INFO: $ntp Service on $VMHost was Off and has been started"
+                    Write-Host "INFO: $ntp Service on $VMHost was Off and has been started" -ForegroundColor Yellow
                 }
 
 

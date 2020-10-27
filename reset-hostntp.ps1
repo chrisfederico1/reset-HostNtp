@@ -44,10 +44,10 @@ Begin {
     Start-Transcript -path .\$filename -Force
 
     # Get NTP Server List
-    $InputNTP1 = Read-Host "First NTP Server:" 
-    $InputNTP2 = Read-Host "Second NTP Server:" 
-    $InputNTP3 = Read-Host "Third NTP Server:" 
-    $InputNTP4 = Read-Host "Fourth NTP Server:"
+    $InputNTP1 = Read-Host "First NTP Server" 
+    $InputNTP2 = Read-Host "Second NTP Server" 
+    $InputNTP3 = Read-Host "Third NTP Server" 
+    $InputNTP4 = Read-Host "Fourth NTP Server"
     write-host ""
 
     

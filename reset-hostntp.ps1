@@ -94,10 +94,12 @@ Process {
                  if ($ntp.Running ){ 
                     Restart-VMHostService $ntp -confirm:$false 
                     Write-Host "INFO: $ntp Service on $vmhostName was On and was restarted" -ForegroundColor Yellow
+                    write-host ""
                     }
                     Else{ 
                         Start-VMHostService $ntp -confirm:$false 
                         Write-Host "INFO: $ntp Service on $vmhostName was Off and has been started" -ForegroundColor Yellow
+                        write-host ""
                     }
 
                  }

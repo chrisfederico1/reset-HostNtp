@@ -40,7 +40,7 @@ Begin {
     Clear-Host
 
     # Start the logger
-    $filename = "reset-hostntplog_" + (get-date -Format "MM-dd-yyyy_hh:mm:ss" + ".txt")
+    $filename = "reset-hostntplog_" + (get-date -Format "MM-dd-yyyy_hh:mm:ss") + ".txt"
     Start-Transcript -path .\$filename -Force
 
     # Get NTP Server List

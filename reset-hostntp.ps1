@@ -6,6 +6,7 @@ function reset-hostntp ()
     
 	.DESCRIPTION
     This function will remove NTP servers and replace them with new NTP servers.
+    It also checks the NTP service and restarts it.
     
 	.Example
     reset-hostntp -Cluster clustername

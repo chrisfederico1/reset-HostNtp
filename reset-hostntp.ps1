@@ -40,7 +40,7 @@ Begin {
     Clear-Host
 
     # Start the logger
-    $filename = "reset-hostntplog_" + (get-date -Format "MM-dd-yyyy_hh:mm:ss") + ".txt"
+    $filename = "reset-hostntplog_" + (get-date -Format "MM-dd-yyyy_hh-mm-ss") + ".txt"
     Start-Transcript -path .\$filename -Force
 
     # Get NTP Server List
@@ -76,7 +76,7 @@ Process {
                  { 
                  #Remove existing NTP servers 
                  Write-Host "INFO: Removing all NTP Servers from $vmhostName" -ForegroundColor Yellow
-                 $allNTPList = Get-VMHostNtpServer -VMHost $vmhostName 
+                 $allNTPList = Get-VMHostNtpServer -VMHost $vmhostName
                  Remove-VMHostNtpServer -VMHost $vmhostName -NtpServer $allNTPList -Confirm:$false | out-null 
                  Write-Host "INFO: All NTP Servers from $vmhostName have been removed" -ForegroundColor Yellow 
                  Write-Host ""

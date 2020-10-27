@@ -40,7 +40,8 @@ Begin {
     Clear-Host
 
     # Start the logger
-    Start-Transcript -path .\reset-hostntpLog.txt -Force
+    $filename = "reset-hostntplog_" + (get-date -Format "MM-dd-yyyy_hh:mm:ss" + ".txt")
+    Start-Transcript -path .\$filename -Force
 
     # Get NTP Server List
     $InputNTP1 = Read-Host "First NTP Server:" 
